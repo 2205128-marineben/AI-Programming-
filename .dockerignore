@@ -1,0 +1,11 @@
+.git
+.gitignore
+*.md
+docs/
+tests/
+report/
+presentation/
+assets/
+run.bat
+run-web.bat
+*.fasl

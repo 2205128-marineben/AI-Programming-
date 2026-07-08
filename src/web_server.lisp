@@ -53,18 +53,26 @@
 (defun ensure-api-handlers ()
   (load (merge-pathnames "api_handlers.lisp" *src-directory*)))
 
-(defun start-web-server (&key (port *web-port*))
+(defun cloud-port ()
+  "Read Render PORT from the environment, else default 8766."
+  #+sbcl
+  (let ((port-str (sb-ext:posix-getenv "PORT")))
+    (if (and port-str (plusp (length port-str)))
+        (parse-integer port-str :junk-allowed t)
+        *web-port*))
+  #-sbcl *web-port*)
+
+(defun start-web-server (&key (port (cloud-port)))
   "Start the chatbot API consumed by the M-Float website."
   (ensure-api-handlers)
   (format t "~%============================================================~%")
   (format t "   M-Float AI API (for website integration)~%")
-  (format t "   API: http://localhost:~d/api/chat~%" port)
-  (format t "   CORS enabled for Firebase Hosting demos~%")
-  (format t "   Keep this running while testing the live Firebase site.~%")
+  (format t "   Listening on 0.0.0.0:~d/api/chat~%" port)
+  (format t "   CORS enabled for Firebase Hosting~%")
   (format t "============================================================~%~%")
   (setf hunchentoot:*catch-errors-p* t)
   (let ((acceptor (make-instance 'hunchentoot:easy-acceptor
-                                 :address "127.0.0.1"
+                                 :address "0.0.0.0"
                                  :port port)))
     (handler-case
         (progn
