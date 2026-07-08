@@ -1,0 +1,17 @@
+name: Keep API Alive
+
+on:
+  schedule:
+    # Render free tier sleeps after ~15 min idle; ping every 10 minutes.
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping chatbot API
+        run: |
+          response="$(curl -fsS --max-time 90 "https://mfloat-ai-chatbot.onrender.com/api/ping")"
+          echo "$response"
+          echo "$response" | grep -q '"ping":"pong"'

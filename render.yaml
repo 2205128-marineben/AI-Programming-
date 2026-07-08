@@ -3,5 +3,5 @@ services:
     name: mfloat-chatbot-api
     runtime: docker
     plan: free
-    healthCheckPath: /api/health
+    healthCheckPath: /api/ping
     autoDeploy: true

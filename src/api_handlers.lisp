@@ -93,6 +93,17 @@
   (setf (hunchentoot:content-type*) "application/json; charset=utf-8")
   "{\"status\":\"ok\",\"service\":\"mfloat-ai-chatbot\"}")
 
+(hunchentoot:define-easy-handler (api-ping :uri "/api/ping") ()
+  (enable-cors)
+  (setf (hunchentoot:content-type*) "application/json; charset=utf-8")
+  "{\"ping\":\"pong\",\"service\":\"mfloat-ai-chatbot\"}")
+
+(hunchentoot:define-easy-handler (api-ping-options :uri "/api/ping"
+                                                   :default-request-type :options) ()
+  (enable-cors)
+  (setf (hunchentoot:return-code*) 204)
+  "")
+
 (hunchentoot:define-easy-handler (api-chat-options :uri "/api/chat"
                                                    :default-request-type :options) ()
   (enable-cors)
