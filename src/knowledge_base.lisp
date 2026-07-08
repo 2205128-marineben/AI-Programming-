@@ -27,13 +27,16 @@
      ("yes" "yeah" "yep" "sure" "ok" "okay" "please" "go ahead" "alright"))
 
     (COMPANY_INFO
-     ("what is mfloat" "what is m float" "about mfloat" "about company"
-      "about the company" "tell me about this site" "tell me about the site"
+     ("what is mfloat" "what is m float" "what is mfloat tech" "about mfloat" "about company"
+      "about the company" "about this company" "tell me about this site" "tell me about the site"
       "tell me about this website" "tell me about the website"
-      "tell me about mfloat" "tell me about the company"
-      "company information" "who we are" "this website"
+      "tell me about mfloat" "tell me about the company" "tell me about this company"
+      "tell about the company" "tell about this company" "tell about mfloat"
+      "company information" "who we are" "who are you" "this website"
       "about this website" "about the website" "about this site"
-      "what is this website" "what is this site" "about the site"))
+      "what is this website" "what is this site" "about the site"
+      "what is this company" "what is the company" "describe the company"
+      "describe your company" "describe this company"))
 
     (COMPANY_LOCATION
      ("where are you located" "where are your offices" "where is your office"
@@ -57,7 +60,9 @@
 
     (SERVICES_OVERVIEW
      ("what services" "your services" "what do you offer" "services you provide"
-      "list services" "what can you build" "what do you do"))
+      "list services" "what can you build" "what do you do"
+      "what does this company do" "what does your company do" "what does the company do"
+      "what does mfloat do" "what do you guys do"))
 
     (SOFTWARE_DEVELOPMENT
      ("software development" "custom software" "build software" "develop app"

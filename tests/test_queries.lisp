@@ -26,6 +26,8 @@
     ("Yes"                            AFFIRMATIVE)
     ("Sure"                           AFFIRMATIVE)
     ("Tell me about this website"     COMPANY_INFO)
+    ("tell about this company"        COMPANY_INFO)
+    ("What does this company do"      SERVICES_OVERVIEW)
     ("What is M-Float?"               COMPANY_INFO)
     ("Tell me about the company"      COMPANY_INFO)
     ("Who are you?"                   COMPANY_INFO)
@@ -57,6 +59,8 @@
     ("Escalate this issue"              ESCALATE_TICKET)
     ("This is frustrating"              FRUSTRATED)
     ("What is the weather today?"     UNKNOWN)))
+
+(defun run-single-test (input expected)
   (multiple-value-bind (intent response)
       (process-single-query input)
     (declare (ignore response))
