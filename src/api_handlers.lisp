@@ -88,12 +88,14 @@
   (setf (hunchentoot:header-out "Access-Control-Allow-Private-Network") "true")
   (setf (hunchentoot:header-out "Access-Control-Max-Age") "86400"))
 
-(hunchentoot:define-easy-handler (api-health :uri "/api/health") ()
+(hunchentoot:define-easy-handler (api-health :uri "/api/health"
+                                             :default-request-type :get) ()
   (enable-cors)
   (setf (hunchentoot:content-type*) "application/json; charset=utf-8")
   "{\"status\":\"ok\",\"service\":\"mfloat-ai-chatbot\"}")
 
-(hunchentoot:define-easy-handler (api-ping :uri "/api/ping") ()
+(hunchentoot:define-easy-handler (api-ping :uri "/api/ping"
+                                           :default-request-type :get) ()
   (enable-cors)
   (setf (hunchentoot:content-type*) "application/json; charset=utf-8")
   "{\"ping\":\"pong\",\"service\":\"mfloat-ai-chatbot\"}")
