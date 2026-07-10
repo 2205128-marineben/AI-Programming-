@@ -17,11 +17,22 @@
            (needle (pad-for-phrase-match pattern)))
       (search needle haystack :test #'char-equal))))
 
+(defun word-count (text)
+  (length (remove "" (tokenize-string (string-trim '(#\space) text))
+                  :test #'string=)))
+
 (defun score-pattern-match (normalized-text pattern)
   "Score how well PATTERN matches NORMALIZED-TEXT.
-Longer phrase matches receive higher scores."
+Longer phrase matches receive higher scores.
+Short filler words score weakly inside longer sentences."
   (if (whole-phrase-match-p normalized-text pattern)
-      (* (length pattern) 10)
+      (let* ((base (* (length pattern) 10))
+             (msg-words (max 1 (word-count normalized-text)))
+             (pat-words (max 1 (word-count pattern))))
+        ;; "okay" / "please" / "hi" must not beat real questions in long messages.
+        (if (and (<= (length pattern) 7) (> msg-words (+ pat-words 2)))
+            (floor base 5)
+            base))
       0))
 
 (defun score-intent (normalized-text intent)
@@ -31,14 +42,20 @@ Longer phrase matches receive higher scores."
                         patterns)
             :initial-value 0)))
 
+(defun filler-intent-p (intent)
+  (member intent '(AFFIRMATIVE GREETING THANK_YOU)))
+
 (defun find-best-intent (normalized-text)
   "Return the intent with the highest pattern match score.
 Returns UNKNOWN if no pattern matches.
 Contact-related queries prefer CONTACT_INFO over COMPANY_INFO."
-  (let ((scores (loop for intent in (get-all-intents)
-                      for score = (score-intent normalized-text intent)
-                      when (> score 0)
-                      collect (cons intent score))))
+  (let* ((scores (loop for intent in (get-all-intents)
+                       for score = (score-intent normalized-text intent)
+                       when (> score 0)
+                       collect (cons intent score)))
+         (sorted (sort (copy-list scores) #'> :key #'cdr))
+         (best (car sorted))
+         (runner-up (cadr sorted)))
     (cond
       ((null scores) 'UNKNOWN)
       ;; Prefer contact when the user clearly asks for email/phone/person
@@ -48,10 +65,22 @@ Contact-related queries prefer CONTACT_INFO over COMPANY_INFO."
                 (whole-phrase-match-p normalized-text "whatsapp")
                 (whole-phrase-match-p normalized-text "contact person")
                 (whole-phrase-match-p normalized-text "contact details")
+                (whole-phrase-match-p normalized-text "contact support")
+                (whole-phrase-match-p normalized-text "contacts")
                 (whole-phrase-match-p normalized-text "company email")
                 (whole-phrase-match-p normalized-text "your email")))
        'CONTACT_INFO)
-      (t (caar (sort scores #'> :key #'cdr))))))
+      ;; Prefer a substantive intent over short filler matches.
+      ((and best
+            (filler-intent-p (car best))
+            runner-up
+            (not (filler-intent-p (car runner-up))))
+       (car runner-up))
+      ((and best
+            (eq (car best) 'AFFIRMATIVE)
+            (> (word-count normalized-text) 3))
+       (if runner-up (car runner-up) 'UNKNOWN))
+      (t (car best)))))
 
 (defun match-intent (processed-input)
   "Accept NLP-processed input and return the matched intent symbol."

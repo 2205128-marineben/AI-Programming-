@@ -2,6 +2,13 @@
 
 **Course:** CPP 4103 – Artificial Intelligence Programming  
 **Project:** Design and Development of an Intelligent Customer Service Chatbot Using LISP and Natural Language Processing
+**Group: I**
+**Members:**
+- Marine Benard — 22/05128
+- Edison Ndungu — 24/03270
+- Trevor Kabiriri — 24/04495
+- Mark Mukenia — 24/03330
+
 
 ## Overview
 
@@ -31,7 +38,7 @@ M-Float AI Chatbot
 
 ## Requirements
 
-Install a Common Lisp implementation:
+We Installed a Common Lisp implementation:
 
 - **SBCL** (recommended): https://www.sbcl.org/
 - **CLISP**: https://clisp.sourceforge.io/

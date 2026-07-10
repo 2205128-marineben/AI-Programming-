@@ -46,11 +46,12 @@
       "where do you operate" "based where" "located where"))
 
     (CONTACT_INFO
-     ("contact" "phone number" "email address" "reach support"
+     ("contact" "contacts" "phone number" "email address" "reach support"
       "customer care number" "call center" "hotline" "contact support"
-      "how to reach" "get in touch" "whatsapp" "company email" "your email"
-      "contact person" "contact details" "contact info" "email"
-      "phone" "call you" "mobile number" "who can i contact"))
+      "contacts for support" "how to reach" "get in touch" "whatsapp"
+      "company email" "your email" "contact person" "contact details"
+      "contact info" "email" "phone" "call you" "mobile number"
+      "who can i contact"))
 
     (CAREERS
      ("careers" "career" "carreers" "job openings" "job vacancies"
@@ -121,12 +122,16 @@
     (REQUEST_AGENT
      ("speak to agent" "talk to agent" "human agent" "live agent" "real person"
       "contact agent" "available agent" "connect me to agent" "transfer to agent"
-      "speak to someone" "talk to someone"))
+      "speak to someone" "talk to someone" "need agent" "need an agent"
+      "agent support" "request agent" "request an agent" "human support"
+      "talk to a human" "speak to a human" "get an agent" "want an agent"
+      "agent assistance" "help from agent" "customer agent"))
 
     (CREATE_TICKET
      ("create ticket" "open ticket" "submit ticket" "raise ticket" "new ticket"
       "file a ticket" "support ticket" "start review" "start the review"
-      "unsuspension review"))
+      "unsuspension review" "open a ticket" "make a ticket" "log a ticket"
+      "ticket for support" "request assistance" "request assistant"))
 
     (CHECK_TICKET_STATUS
      ("check status" "ticket status" "status of my request" "my request status"
