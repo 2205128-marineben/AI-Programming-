@@ -125,7 +125,8 @@
       "speak to someone" "talk to someone" "need agent" "need an agent"
       "agent support" "request agent" "request an agent" "human support"
       "talk to a human" "speak to a human" "get an agent" "want an agent"
-      "agent assistance" "help from agent" "customer agent"))
+      "agent assistance" "help from agent" "customer agent"
+      "ai support" "ai-support" "ai assistant" "request ai support"))
 
     (CREATE_TICKET
      ("create ticket" "open ticket" "submit ticket" "raise ticket" "new ticket"
@@ -224,10 +225,10 @@
      "To file a complaint, I can open a support ticket for you or you can contact us through the details on our website.")
 
     (REQUEST_AGENT
-     "I can connect you with a support agent. Please describe your issue and I will open a support ticket for you.")
+     "I can connect you with a support agent. I will first collect your full name, email, and phone number, then open a support ticket.")
 
     (CREATE_TICKET
-     "Share a short description of your issue and I will open a support ticket for you.")
+     "I can open a support ticket for you. I will first collect your full name, email, and phone number.")
 
     (CHECK_TICKET_STATUS
      "Tell me your ticket number or ask me to check the status of your latest request.")
